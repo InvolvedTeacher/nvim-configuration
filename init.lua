@@ -72,9 +72,16 @@ vim.g.vim_ui_open_cmd = "gio open"
 vim.pack.add({
     { src = "https://github.com/catppuccin/nvim.git" },
     { src = "https://github.com/MunifTanjim/nui.nvim.git" },    -- for neo-tree
-    { src = "https://github.com/nvim-lua/plenary.nvim.git" },   -- for neo-tree
+    { src = "https://github.com/nvim-lua/plenary.nvim.git" },   -- for neo-tree, telescope
     { src = "https://github.com/nvim-tree/nvim-web-devicons" }, -- for neo-tree
+-- git
+
+
+
     { src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = vim.version.range('3') },
+    { src = 'https://github.com/nvim-telescope/telescope.nvim.git' },
+    { src = 'https://github.com/sindrets/diffview.nvim.git' },  -- for neogit
+    { src = 'https://github.com/NeogitOrg/neogit.git' },
 })
 
     -- Catpuccin
@@ -118,8 +125,37 @@ neo_tree.setup({
     }
 })
 
+    -- Telescope
+builtin = require('telescope.builtin')
+
+        -- Keymaps
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+    -- Neogit
+    -- TODO Check neogit docs to learn more.
+git = require("neogit")
+
+        -- Keymaps
+vim.keymap.set('n', '<leader>gs', function() Git.open({kind='split'}) end, { desc = 'pick buffers' })
+vim.keymap.set('n', '<leader>gd', "<cmd>DiffviewOpen<CR>", { desc = 'pick buffers' })
 
 -- Additional keymaps
+
+    -- Temporary, for good practices: Disable arrow keys in normal mode
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
     -- Open filesystem in Neo-tree
 vim.keymap.set('n', "<leader>t", function()
