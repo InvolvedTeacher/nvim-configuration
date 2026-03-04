@@ -21,7 +21,7 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
         -- Autocomplete
-vim.cmd("set completeopt+=noselect,menuone,popup")
+vim.cmd("set completeopt+=noinsert,menuone,popup")
 
         -- Other appearance settings
 vim.opt.termguicolors = true
