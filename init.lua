@@ -74,10 +74,6 @@ vim.pack.add({
     { src = "https://github.com/MunifTanjim/nui.nvim.git" },    -- for neo-tree
     { src = "https://github.com/nvim-lua/plenary.nvim.git" },   -- for neo-tree, telescope
     { src = "https://github.com/nvim-tree/nvim-web-devicons" }, -- for neo-tree
--- git
-
-
-
     { src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = vim.version.range('3') },
     { src = 'https://github.com/nvim-telescope/telescope.nvim.git' },
     { src = 'https://github.com/sindrets/diffview.nvim.git' },  -- for neogit
@@ -124,6 +120,13 @@ neo_tree.setup({
         },
     }
 })
+        -- Keymaps
+vim.keymap.set('n', "<leader>t", function()
+    require("neo-tree.command").execute({ 
+        action="focus", source="filesystem", position="float", toggle=true 
+    })
+    end , { desc = "Open filesystem in Neotree" })
+
 
     -- Telescope
 builtin = require('telescope.builtin')
@@ -156,13 +159,6 @@ vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
-    -- Open filesystem in Neo-tree
-vim.keymap.set('n', "<leader>t", function()
-    require("neo-tree.command").execute({ 
-        action="focus", source="filesystem", position="float", toggle=true 
-    })
-    end , { desc = "Filesystem tree" })
 
 
 --[[ TODO look these ones up and set up to my preferences
