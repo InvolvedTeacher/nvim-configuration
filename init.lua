@@ -152,6 +152,48 @@ git = require("neogit")
 vim.keymap.set('n', '<leader>gs', function() Git.open({kind='split'}) end, { desc = 'pick buffers' })
 vim.keymap.set('n', '<leader>gd', "<cmd>DiffviewOpen<CR>", { desc = 'pick buffers' })
 
+-- LSP setup
+local on_attach = function(client, bufnr)
+    vim.lsp.completion.enable(true, client.id, bufnr, {
+        autotrigger = true,
+        convert = function(item)
+            return { abbr = item.label:gsub('%b()', '') }
+        end,
+    })
+    vim.keymap.set('i', '<C-space>', vim.lsp.completion.get, { desc = 'trigger autocompletion' })
+end
+
+    -- lua
+vim.lsp.config('lua_ls',{
+    on_attach = on_attach ,
+    filetypes = { 'lua' },
+    cmd = { 'lua-language-server' },
+    root_markers = {
+        ".luarc.json",
+        ".luarc.jsonc",
+        ".luacheckrc",
+        ".stylua.toml",
+        ".git",
+      },
+      settings = {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT',
+          }
+        }
+      }
+})
+
+    -- clangd
+vim.lsp.config('clangd',{
+    cmd = { 'clangd', '--background-index', '--clang-tidy' },
+    filetypes = { 'c', 'cpp' },
+    on_attach = on_attach
+})
+
+    -- Enable LSPs
+vim.lsp.enable({ "lua_ls", "clangd", "gdscript" })
+
 -- Additional keymaps
 
     -- Temporary, for good practices: Disable arrow keys in normal mode
