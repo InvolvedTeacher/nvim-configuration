@@ -20,15 +20,26 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
+        -- Window splits
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+        -- Whitespace characters display
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
         -- Autocomplete
 vim.cmd("set completeopt+=noinsert,menuone,popup")
 
         -- Other appearance settings
 vim.opt.termguicolors = true
-vim.o.cursorline = true
+vim.opt.cursorline = true
 vim.opt.wrap = true
 vim.opt.winborder = "rounded"
 vim.opt.scrolloff = 10
+vim.g.have_nerd_font = true
+vim.opt.showmode = false
+vim.opt.confirm = true
 
             -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -66,6 +77,11 @@ vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = 'a'
 vim.g.vim_ui_open_cmd = "gio open"
+        -- Enable undo/redo even after closing and reopening file
+vim.opt.undofile = true
+        -- Case insensitive search unless \C or one or more capital letters used
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Plugin installation and setup
 
@@ -73,11 +89,16 @@ vim.pack.add({
     { src = "https://github.com/catppuccin/nvim.git" },
     { src = "https://github.com/MunifTanjim/nui.nvim.git" },    -- for neo-tree
     { src = "https://github.com/nvim-lua/plenary.nvim.git" },   -- for neo-tree, telescope
-    { src = "https://github.com/nvim-tree/nvim-web-devicons" }, -- for neo-tree
+    { src = "https://github.com/nvim-tree/nvim-web-devicons" }, -- for neo-tree, which-key
     { src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = vim.version.range('3') },
     { src = 'https://github.com/nvim-telescope/telescope.nvim.git' },
     { src = 'https://github.com/sindrets/diffview.nvim.git' },  -- for neogit
     { src = 'https://github.com/NeogitOrg/neogit.git' },
+    { src = "https://github.com/nvim-mini/mini.icons.git" },    -- for which-key
+    { src = "https://github.com/folke/which-key.nvim.git" },
+    { src = "https://github.com/hrsh7th/nvim-cmp.git" },        -- for blink.cmp
+    { src = "https://github.com/hrsh7th/cmp-nvim-lsp.git" },    -- for blink.cmp
+    { src = "https://github.com/saghen/blink.cmp.git" },
 })
 
     -- Catpuccin
@@ -152,7 +173,30 @@ git = require("neogit")
 vim.keymap.set('n', '<leader>gs', function() Git.open({kind='split'}) end, { desc = 'pick buffers' })
 vim.keymap.set('n', '<leader>gd', "<cmd>DiffviewOpen<CR>", { desc = 'pick buffers' })
 
+    -- Blink
+blink = require("blink.cmp")
+blink.setup({
+    keymap = { preset = 'default' },
+    appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = 'mono'
+    },
+    completion = {
+        documentation = { auto_show = true }
+    },
+    sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
+    fuzzy = {
+        implementation = "lua"
+    },
+})
+
 -- LSP setup
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+
 local on_attach = function(client, bufnr)
     vim.lsp.completion.enable(true, client.id, bufnr, {
         autotrigger = true,
@@ -167,6 +211,7 @@ end
 vim.lsp.config('lua_ls',{
     on_attach = on_attach ,
     filetypes = { 'lua' },
+    capabilities = { capabilities },
     cmd = { 'lua-language-server' },
     root_markers = {
         ".luarc.json",
@@ -188,6 +233,7 @@ vim.lsp.config('lua_ls',{
 vim.lsp.config('clangd',{
     cmd = { 'clangd', '--background-index', '--clang-tidy' },
     filetypes = { 'c', 'cpp' },
+    capabilities = { capabilities },
     on_attach = on_attach
 })
 
