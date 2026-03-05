@@ -99,6 +99,7 @@ vim.pack.add({
     { src = "https://github.com/hrsh7th/nvim-cmp.git" },        -- for blink.cmp
     { src = "https://github.com/hrsh7th/cmp-nvim-lsp.git" },    -- for blink.cmp
     { src = "https://github.com/saghen/blink.cmp.git" },
+    { src = "https://github.com/stevearc/conform.nvim.git" },
 })
 
     -- Catpuccin
@@ -239,6 +240,21 @@ vim.lsp.config('clangd',{
 
     -- Enable LSPs
 vim.lsp.enable({ "lua_ls", "clangd", "gdscript" })
+
+-- Autoformat
+
+    -- Conform
+conform = require("conform")
+conform.setup({
+    formatters_by_ft = {
+        lua = { "stylua" },
+        cpp = { "clangd" },
+    },
+    format_on_save = {
+        timeout_ms = 500,
+        lsp_format = "prefer",
+    },
+})
 
 -- Additional keymaps
 
