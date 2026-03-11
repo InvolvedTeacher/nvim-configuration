@@ -27,7 +27,7 @@ vim.opt.wrap = true
 vim.opt.winborder = "rounded"
 vim.opt.scrolloff = 10
 vim.g.have_nerd_font = true
-vim.opt.showmode = true         -- Change when plugin for status bar is applied
+vim.opt.showmode = false
 vim.opt.confirm = true
 
 -- Highlight when yanking (copying) text
