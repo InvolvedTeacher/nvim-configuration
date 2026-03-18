@@ -1,6 +1,6 @@
 -- lua
-vim.lsp.config('lua_ls',{
-    on_attach = on_attach ,
+vim.lsp.config('lua_ls', {
+    on_attach = on_attach,
     filetypes = { 'lua' },
     capabilities = { capabilities },
     cmd = { 'lua-language-server' },
@@ -10,13 +10,12 @@ vim.lsp.config('lua_ls',{
         ".luacheckrc",
         ".stylua.toml",
         ".git",
-      },
-      settings = {
+    },
+    settings = {
         Lua = {
-          runtime = {
-            version = 'LuaJIT',
-          }
+            runtime = {
+                version = 'LuaJIT',
+            }
         }
-      }
+    }
 })
-
