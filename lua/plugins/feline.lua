@@ -328,6 +328,55 @@ table.insert(components.active[LEFT], {
     },
 })
 
+-- insert git information
+table.insert(components.active[LEFT], {
+    name = 'git-branch',
+    provider = 'git_branch',
+    left_sep = ' ',
+    hl = {
+        fg = 'white'
+    },
+})
+
+table.insert(components.active[LEFT], {
+    name = 'git-added',
+    provider = 'git_diff_added',
+    icon = {
+        str = ' 󰜄 ',
+        hl = { fg = 'green' },
+    },
+    left_sep = ' ',
+    hl = {
+        fg = 'green',
+    },
+})
+
+table.insert(components.active[LEFT], {
+    name = 'git-changed',
+    provider = 'git_diff_changed',
+    icon = {
+        str = ' 󱗝 ',
+        hl = { fg = 'orange' },
+    },
+    left_sep = ' ',
+    hl = {
+        fg = 'orange',
+    },
+})
+
+table.insert(components.active[LEFT], {
+    name = 'git-removed',
+    provider = 'git_diff_removed',
+    icon = {
+        str = ' 󰛲 ',
+        hl = { fg = 'red' },
+    },
+    left_sep = ' ',
+    hl = {
+        fg = 'red',
+    },
+})
+
 table.insert(components.active[RIGHT], {
     name = 'diagnostic_hints',
     provider = wrapped_provider(provide_hint_count, wrap),
