@@ -1,5 +1,5 @@
 -- Blink
-blink = require("blink.cmp")
+local blink = require("blink.cmp")
 blink.setup({
     keymap = { preset = 'default' },
     appearance = {
@@ -16,4 +16,3 @@ blink.setup({
         implementation = "lua"
     },
 })
-

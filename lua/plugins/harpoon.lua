@@ -1,4 +1,4 @@
-harpoon = require("harpoon")
+local harpoon = require("harpoon")
 
 harpoon.setup()
 

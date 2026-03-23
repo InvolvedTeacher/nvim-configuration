@@ -2,9 +2,9 @@
 -- [[ Target status bar:
 --   mode\ \file\ \git\ .. /diagnostics(colors)/language/ /line:col'/'lines
 -- ]]
-feline = require("feline")
-vi_mode = require('feline.providers.vi_mode')
-lsp = require("feline.providers.lsp")
+local feline = require("feline")
+local vi_mode = require('feline.providers.vi_mode')
+local lsp = require("feline.providers.lsp")
 
 --
 -- Define constants
@@ -54,7 +54,7 @@ local THEME = {
 --]]
 
 --- get the current buffer's file name, defaults to '[no name]'
-function get_filename()
+local function get_filename()
     local filename = vim.api.nvim_buf_get_name(0)
     if filename == '' then
         filename = '[no name]'
@@ -66,7 +66,7 @@ function get_filename()
 end
 
 --- get the current buffer's file type, defaults to '[not type]'
-function get_filetype()
+local function get_filetype()
     local filetype = vim.bo.filetype
     if filetype == '' then
         filetype = '[no type]'
@@ -75,18 +75,18 @@ function get_filetype()
 end
 
 --- get the cursor's line and column
-function get_line_col_cursor()
+local function get_line_col_cursor()
     local cursor_line, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
     return cursor_line .. ':' .. cursor_col
 end
 
 --- get the file's total number of lines
-function get_line_total()
+local function get_line_total()
     return vim.api.nvim_buf_line_count(0)
 end
 
 --- wrap a string with whitespaces
-function wrap(string)
+local function wrap(string)
     return ' ' .. string .. ' '
 end
 
@@ -94,14 +94,14 @@ end
 -- the provider must conform to signature: (component, opts) -> string
 -- the wrapper must conform to the signature: (string) -> string
 -- NOTE: Currently this is over-engineered. It is left intentionally for possible use in the future.
-function wrapped_provider(provider, wrapper)
+local function wrapped_provider(provider, wrapper)
     return function(component, opts)
         return wrapper(provider(component, opts))
     end
 end
 
 -- Diagnostics separator getters
-function get_filetype_left_sep()
+local function get_filetype_left_sep()
     if (#vim.diagnostic.get(0, { severity = {
             vim.diagnostic.severity.ERROR,
             vim.diagnostic.severity.WARN,
@@ -113,7 +113,7 @@ function get_filetype_left_sep()
     return 'slant_left'
 end
 
-function get_error_left_sep()
+local function get_error_left_sep()
     if (#vim.diagnostic.get(0, { severity = {
             vim.diagnostic.severity.WARN,
             vim.diagnostic.severity.INFO,
@@ -124,7 +124,7 @@ function get_error_left_sep()
     return 'slant_left'
 end
 
-function get_warn_left_sep()
+local function get_warn_left_sep()
     if (#vim.diagnostic.get(0, { severity = {
             vim.diagnostic.severity.INFO,
             vim.diagnostic.severity.HINT,
@@ -134,7 +134,7 @@ function get_warn_left_sep()
     return 'slant_left'
 end
 
-function get_info_left_sep()
+local function get_info_left_sep()
     if (#vim.diagnostic.get(0, { severity = {
             vim.diagnostic.severity.HINT,
         } }) > 0) then
@@ -143,7 +143,7 @@ function get_info_left_sep()
     return 'slant_left'
 end
 
-function get_warn_right_sep()
+local function get_warn_right_sep()
     if (#vim.diagnostic.get(0, { severity = {
             vim.diagnostic.severity.ERROR,
         } }) > 0) then
@@ -164,7 +164,7 @@ function get_warn_right_sep()
     }
 end
 
-function get_info_right_sep()
+local function get_info_right_sep()
     if (#vim.diagnostic.get(0, { severity = {
             vim.diagnostic.severity.WARN,
         } }) > 0) then
@@ -196,7 +196,7 @@ function get_info_right_sep()
     }
 end
 
-function get_hint_right_sep()
+local function get_hint_right_sep()
     if (#vim.diagnostic.get(0, { severity = {
             vim.diagnostic.severity.INFO,
         } }) > 0) then
@@ -244,45 +244,45 @@ end
 --]]
 
 --- provide the vim mode (NOMRAL, INSERT, etc.)
-function provide_mode(component, opts)
+local function provide_mode(component, opts)
     return vi_mode.get_vim_mode()
 end
 
 --- provide the buffer's file name
-function provide_filename(component, opts)
+local function provide_filename(component, opts)
     return get_filename()
 end
 
 --- provide the line's information (curosor position and file's total lines)
-function provide_linenumber(component, opts)
+local function provide_linenumber(component, opts)
     return get_line_col_cursor() .. '/' .. get_line_total()
 end
 
 -- provide the buffer's file type
-function provide_filetype(component, opts)
+local function provide_filetype(component, opts)
     return get_filetype()
 end
 
 --- provide only the number of diagnostic errors
-function provide_hint_count(component, opts)
+local function provide_hint_count(component, opts)
     local counts = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
     return #counts > 0 and tostring(#counts) or '' -- Return the count or an empty string if there are none
 end
 
 --- provide only the number of diagnostic errors
-function provide_info_count(component, opts)
+local function provide_info_count(component, opts)
     local counts = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
     return #counts > 0 and tostring(#counts) or '' -- Return the count or an empty string if there are none
 end
 
 --- provide only the number of diagnostic errors
-function provide_warn_count(component, opts)
+local function provide_warn_count(component, opts)
     local counts = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
     return #counts > 0 and tostring(#counts) or '' -- Return the count or an empty string if there are none
 end
 
 --- provide only the number of diagnostic errors
-function provide_error_count(component, opts)
+local function provide_error_count(component, opts)
     local counts = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     return #counts > 0 and tostring(#counts) or '' -- Return the count or an empty string if there are none
 end

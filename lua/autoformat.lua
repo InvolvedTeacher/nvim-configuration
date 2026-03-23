@@ -1,10 +1,10 @@
 -- Autoformat
 
-    -- Conform
-conform = require("conform")
+-- Conform
+local conform = require("conform")
 conform.setup({
     formatters_by_ft = {
-        lua = { "stylua" },     -- TODO: Fix (not working)
+        lua = { "stylua" }, -- TODO: Fix (not working)
         cpp = { "clangd" },
     },
     format_on_save = {
@@ -12,4 +12,3 @@ conform.setup({
         lsp_format = "prefer",
     },
 })
-

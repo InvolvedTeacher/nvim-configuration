@@ -1,5 +1,5 @@
 -- Neo-tree
-neo_tree = require("neo-tree")
+local neo_tree = require("neo-tree")
 
 neo_tree.setup({
     filesystem = {
@@ -38,10 +38,9 @@ neo_tree.setup({
     }
 })
 
-    -- Keymaps
+-- Keymaps
 vim.keymap.set('n', "<leader>t", function()
-    require("neo-tree.command").execute({ 
-        action="focus", source="filesystem", position="float", toggle=true 
+    require("neo-tree.command").execute({
+        action = "focus", source = "filesystem", position = "float", toggle = true
     })
-    end , { desc = "Open filesystem in Neotree" })
-
+end, { desc = "Open filesystem in Neotree" })

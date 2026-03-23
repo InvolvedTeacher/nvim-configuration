@@ -1,8 +1,7 @@
 -- C#
-vim.lsp.config("csharp",{
-    on_attach = on_attach,
+vim.lsp.config("csharp", {
+    on_attach = On_attach,
     filetypes = { "cs" },
-    capabilities = { capabilities },
+    capabilities = { Capabilities },
     cmd = { "csharp-ls" },
 })
-

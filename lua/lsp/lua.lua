@@ -1,8 +1,8 @@
 -- lua
 vim.lsp.config('lua_ls', {
-    on_attach = on_attach,
+    on_attach = On_attach,
     filetypes = { 'lua' },
-    capabilities = { capabilities },
+    capabilities = { Capabilities },
     cmd = { 'lua-language-server' },
     root_markers = {
         ".luarc.json",

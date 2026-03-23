@@ -1,6 +1,6 @@
 -- Neogit
 -- TODO Check neogit docs to learn more.
-git = require("neogit")
+local git = require("neogit")
 
 -- Keymaps
 vim.keymap.set('n', '<leader>gs', function() git.open({ kind = 'split' }) end, { desc = 'pick buffers' })

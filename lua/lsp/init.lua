@@ -1,9 +1,9 @@
 -- LSP setup
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+Capabilities = vim.lsp.protocol.make_client_capabilities()
+Capabilities = vim.tbl_deep_extend("force", Capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-    -- on_attach function, to use for all LSPs
-local on_attach = function(client, bufnr)
+-- on_attach function, to use for all LSPs
+On_attach = function(client, bufnr)
     vim.lsp.completion.enable(true, client.id, bufnr, {
         autotrigger = true,
         convert = function(item)
@@ -20,4 +20,3 @@ require("lsp.csharp")
 
 -- Enable LSPs
 vim.lsp.enable({ "lua_ls", "clangd", "gdscript", "csharp" })
-
