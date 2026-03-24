@@ -2,6 +2,9 @@
 Capabilities = vim.lsp.protocol.make_client_capabilities()
 Capabilities = vim.tbl_deep_extend("force", Capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+-- Prevent autofill with the first element of list
+vim.o.completeopt = 'menu,menuone,noinsert'
+
 -- on_attach function, to use for all LSPs
 On_attach = function(client, bufnr)
     vim.lsp.completion.enable(true, client.id, bufnr, {
