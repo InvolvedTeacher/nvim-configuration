@@ -9,7 +9,11 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- Vertical rulers
-vim.opt.colorcolumn = {"80"}
+vim.opt.colorcolumn = { "80" }
+
+-- Split direction setup
+vim.o.splitright = true
+vim.o.splitbelow = true
 
 -- Line numbers
 vim.opt.number = true
@@ -32,9 +36,9 @@ vim.opt.confirm = true
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function() vim.hl.on_yank() end,
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function() vim.hl.on_yank() end,
 })
 
 -- Enable undo/redo even after closing and reopening file
@@ -47,11 +51,11 @@ vim.opt.smartcase = true
 -- MAN stuff
 vim.g.man_default_sects = '2,3'
 
-    -- Open MAN on cursor
+-- Open MAN on cursor
 vim.keymap.set('n', "mm", function()
     local cursor = vim.fn.expand('<cword>')
     vim.api.nvim_command(':tab Man ' .. cursor)
-end, {desc='open man on cursor'})
+end, { desc = 'open man on cursor' })
 
 -- Other general settings
 vim.opt.swapfile = false
@@ -61,21 +65,21 @@ vim.g.vim_ui_open_cmd = "gio open"
 
 -- Keymaps
 
-    -- Reload this file (for quick iterations trying confs)
-    -- Note: with this conf this does not work.
+-- Reload this file (for quick iterations trying confs)
+-- Note: with this conf this does not work.
 -- vim.keymap.set('n', "<leader>+", ":update<CR> :source<CR>")
 
-    -- Tabs navigation
-vim.keymap.set({'n','i'}, "<C-h>", ":tabprevious<CR>")
-vim.keymap.set({'n','i'}, "<C-l>", ":tabnext<CR>")
+-- Tabs navigation
+vim.keymap.set({ 'n', 'i' }, "<C-h>", ":tabprevious<CR>")
+vim.keymap.set({ 'n', 'i' }, "<C-l>", ":tabnext<CR>")
 
-    -- Exit terminal with <esc>
+-- Exit terminal with <esc>
 vim.keymap.set('t', "<esc>", "<c-\\><c-n>", { desc = "esc in terinal mode." })
 
-    -- Clear highlights on search when pressing <Esc> in normal mode
+-- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-    -- Temporary, for good practices: Disable arrow keys in normal mode
+-- Temporary, for good practices: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
