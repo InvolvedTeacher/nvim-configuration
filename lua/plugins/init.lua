@@ -16,9 +16,12 @@ vim.pack.add({
     { src = "https://github.com/folke/which-key.nvim.git" },
     { src = "https://github.com/hrsh7th/nvim-cmp.git" },              -- for blink.cmp
     { src = "https://github.com/hrsh7th/cmp-nvim-lsp.git" },          -- for blink.cmp
-    { src = "https://github.com/saghen/blink.cmp.git" },              -- standalone, for render-markdown
+    {
+        src = "https://github.com/saghen/blink.cmp.git",
+        version = vim.version.range('1.*')
+    },                                                          -- standalone, for render-markdown
     { src = "https://github.com/stevearc/conform.nvim.git" },
-    { src = "https://github.com/lewis6991/gitsigns.nvim.git" },       -- for feline
+    { src = "https://github.com/lewis6991/gitsigns.nvim.git" }, -- for feline
     { src = "https://github.com/famiu/feline.nvim.git" },
     { src = "https://github.com/pianocomposer321/project-templates.nvim.git" },
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim.git" },
