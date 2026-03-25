@@ -23,3 +23,8 @@ require("lsp.csharp")
 
 -- Enable LSPs
 vim.lsp.enable({ "lua_ls", "clangd", "gdscript", "csharp" })
+
+-- Additional keymaps
+
+vim.keymap.set('n', "<leader>gd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition" })
+-- vim.keymap.set('n', "<leader>fo", vim.lsp.buf.format, { desc = "vim.lsp.buf.format" })

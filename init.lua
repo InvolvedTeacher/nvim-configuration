@@ -1,18 +1,8 @@
--- Core settings
+-- lua/core.lua contains what I believe are core functionality settings.
 require "core"
 
--- Plugins setup
+-- lua/plugins/init.lua contains all the plugin related settings, including the imports.
 require "plugins"
 
--- LSP setup
+-- lua/lsp/init.lua contains all the LSP related settings.
 require "lsp"
-
--- Autoformat
-require "autoformat"
-
--- Additional keymaps
-
---[[ TODO look these ones up and set up to my preferences
-vim.keymap.set('n', "<leader>gd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition" })
-vim.keymap.set('n', "<leader>fo", vim.lsp.buf.format, { desc = "vim.lsp.buf.format" })
-]]

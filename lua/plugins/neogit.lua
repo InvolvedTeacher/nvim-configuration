@@ -3,5 +3,5 @@
 local git = require("neogit")
 
 -- Keymaps
-vim.keymap.set('n', '<leader>gs', function() git.open({ kind = 'split' }) end, { desc = 'pick buffers' })
-vim.keymap.set('n', '<leader>gd', "<cmd>DiffviewOpen<CR>", { desc = 'pick buffers' })
+vim.keymap.set('n', '<leader>gs', function() git.open({ kind = 'auto' }) end, { desc = "Open Neogit Status" })
+vim.keymap.set('n', '<leader>gd', "<cmd>DiffviewOpen<CR>", { desc = "Open Neogit Diff" })
