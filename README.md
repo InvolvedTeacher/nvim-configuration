@@ -9,7 +9,7 @@ Here is a complete list of all the external requirements that are needed for thi
 - For Lua LSP support, I have followed the following [instructions](https://luals.github.io/#neovim-install), building from scratch.
 - For C++ LSP support, [clangd](https://clangd.llvm.org/) must be installed in your system.
 - [Dotnet](https://dotnet.microsoft.com/en-us/download) for C# language support.
-- For C# LSP support, I use [csharp-ls](https://github.com/razzmatazz/csharp-language-server).
+- For C# LSP support, I use [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn).
 - [ripgrep](https://github.com/BurntSushi/ripgrep) is an optional dependency for [telescope](https://github.com/nvim-telescope/telescope.nvim), which is installed.
 - [Git](https://git-scm.com/) must be installed in order to use [Neogit](https://github.com/NeogitOrg/neogit).
 - The python requirements listed for the [project-templates](https://github.com/pianocomposer321/project-templates.nvim) plugin.
