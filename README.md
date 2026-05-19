@@ -22,4 +22,4 @@ For Godot to open files in neovim:
 
 Exec Path `/path/to/neovim`
 
-Exec Flags `--server {project}/server.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>"`
+Exec Flags `--server {project}/server.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line},{col})<CR>"`
