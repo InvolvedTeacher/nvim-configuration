@@ -16,3 +16,10 @@ Here is a complete list of all the external requirements that are needed for thi
 
 - [ ] [render-markdown](https://github.com/MeanderingProgrammer/render-markdown.nvim) requirements.
 
+For Godot to open files in neovim:
+
+**External editor**
+
+Exec Path `/path/to/neovim`
+
+Exec Flags `--server {project}/server.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>"`
